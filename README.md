@@ -1,4 +1,4 @@
-[README_storytelling.md](https://github.com/user-attachments/files/27286566/README_storytelling.md)
+
 
 # Análise Financeira Empresarial — Superstore
 
@@ -113,29 +113,10 @@ A Superstore tem um problema sério e específico: **descontos excessivos em Tab
 
 ---
 
-## Como Executar
 
-```bash
-git clone https://github.com/arthuraguiarvillar-glitch/An-lise-Financeira-Empresarial-Superstore.git
-pip install pandas seaborn matplotlib
-jupyter notebook analise_superstore.ipynb
-```
-
----
-
-## Estrutura do Projeto
-
-```
-An-lise-Financeira-Empresarial-Superstore/
-├── Superstore.csv
-├── analise_superstore.ipynb
-└── README.md
-```
-
----
 
 ## Autor
 
 **Arthur Villar** — Estudante de Data Science
 
-[![GitHub](https://img.shields.io/badge/GitHub-arthuraguiarvillar--glitch-181717?style=flat-square&logo=github)](https://github.com/arthuraguiarvillar-glitch)
+
