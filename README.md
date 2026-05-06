@@ -1,122 +1,127 @@
 
 
-# Análise Financeira Empresarial — Superstore
+# Análise de Inadimplência e Performance Financeira
 
-![Python](https://img.shields.io/badge/Python-3.9-blue?style=flat-square&logo=python)
-![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?style=flat-square&logo=pandas)
-![Seaborn](https://img.shields.io/badge/Seaborn-Visualization-4c72b0?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Concluído-green?style=flat-square)
-
-> **Uma rede de lojas americana fatura milhões por ano — mas será que está realmente lucrando?**
-> Esta análise investiga onde o dinheiro está sendo perdido e por quê.
-
----
-
-## O Problema
-
-A Superstore é uma rede de lojas com operações em todo os Estados Unidos. Com mais de **9.994 pedidos entre 2014 e 2017**, a empresa parece saudável à primeira vista. Mas ao analisar os dados com mais profundidade, um problema grave surge: **uma categoria inteira está destruindo o lucro da empresa.**
-
----
-
-## A Investigação
-
-### Passo 1 — O faturamento cresce, mas o lucro acompanha?
-
-Ao analisar o faturamento por ano, a empresa parece estar crescendo consistentemente. Porém, ao comparar com o lucro, percebemos que o crescimento de vendas não se traduz proporcionalmente em lucro.
-
-### Passo 2 — Qual categoria está com problema?
-
-Ao calcular a margem de lucro por categoria, o resultado é claro:
-
-| Categoria | Margem de Lucro |
-|---|---|
-| Technology | 15.6% |
-| Office Supplies | 13.8% |
-| **Furniture** | **3.8%** |
-
-Furniture (Móveis) tem uma margem alarmantemente baixa. Para uma empresa, uma margem de 3.8% significa que de cada R$100 vendidos, apenas R$3,80 viram lucro.
-
-### Passo 3 — O que há dentro de Furniture?
-
-Investigando as subcategorias, o problema fica ainda mais grave:
-
-| Subcategoria | Margem de Lucro |
-|---|---|
-| Furnishings | +13.7% |
-| Chairs | +4.4% |
-| **Bookcases** | **-12.7%** |
-| **Tables** | **-14.8%** |
-
-**Tables e Bookcases estão sendo vendidas com prejuízo.** Ou seja, quanto mais a empresa vende esses produtos, mais dinheiro ela perde.
-
-### Passo 4 — Qual é a causa raiz?
-
-Analisando o desconto médio por subcategoria:
-
-| Subcategoria | Desconto Médio |
-|---|---|
-| **Tables** | **26.1%** |
-| **Bookcases** | **21.1%** |
-| Chairs | 17.0% |
-| Furnishings | 13.8% |
-
-Os produtos com maior prejuízo são exatamente os que recebem os maiores descontos. E o pior: ao analisar a correlação entre desconto e vendas, descobrimos que o desconto **não aumenta as vendas** (correlação: -0.028). A empresa está simplesmente jogando dinheiro fora.
-
-### Passo 5 — Qual é o ponto de virada?
-
-A análise do gráfico de dispersão (Desconto vs Lucro) revela que a partir de **30% de desconto**, praticamente toda venda de Furniture se torna prejuízo.
-
----
-
-## Conclusão e Recomendações
-
-A Superstore tem um problema sério e específico: **descontos excessivos em Tables e Bookcases estão destruindo a lucratividade de toda a categoria Furniture.**
-
-**Recomendações:**
-
-- Limitar descontos em Tables e Bookcases a no máximo 20%
-- Revisar a política de descontos — os dados mostram que descontos não aumentam vendas
-- Focar esforços de vendas em Technology e Office Supplies, que têm margens saudáveis
-- Investigar se os fornecedores de Tables e Bookcases podem oferecer preços melhores
+Análise de uma carteira de crédito simulada com foco em inadimplência, aging de parcelas, exposição financeira por segmento e correlação entre score de crédito e comportamento de pagamento.
 
 ---
 
 ## Sobre o Dataset
 
 | Info | Valor |
-|---|---|
-| Fonte | Kaggle — Superstore Sales Dataset |
-| Total de registros | 9.994 pedidos |
-| Período | 2014 a 2017 |
-| Variáveis | Vendas, Lucro, Desconto, Categoria, Subcategoria, Segmento, Região, Estado, Clientes |
-
----
-
-## Análises Realizadas
-
-- Faturamento anual e sazonalidade mensal
-- Margem de lucro por categoria e subcategoria
-- Impacto do desconto no lucro (causa raiz do problema)
-- Top 10 produtos mais lucrativos e com maior prejuízo
-- Top 10 clientes mais valiosos
-- Desempenho por segmento e região
-- Mapa de correlação entre variáveis numéricas
+| --- | --- |
+| Fonte | Dataset simulado — carteira de crédito fintech |
+| Total de registros | 8 pagamentos / 5 contratos / 5 clientes |
+| Período | 2022 a 2025 |
+| Variáveis | Valor, Produto, Score de Crédito, Dias de Atraso, UF, Segmento (PF/PJ), Status do Contrato |
 
 ---
 
 ## Ferramentas Utilizadas
 
-- **Python 3.9** — linguagem principal
-- **Pandas** — manipulação e análise de dados
-- **Seaborn** — visualizações estatísticas
-- **Matplotlib** — gráficos e customizações
+- **SQL (PostgreSQL)** — modelagem, ETL e queries analíticas
+- **Python 3.9** — análise exploratória, visualizações e descobertas
+- **Excel Avançado** — tabela dinâmica, slicers, formatação condicional
 
 ---
 
+## Estrutura do Projeto
 
+```
+📁 Analise-de-Inadimplencia-e-Performance-Financeira/
+├── dados_clientes.csv
+├── dados_contratos.csv
+├── dados_pagamentos.csv
+├── analise_inadimplencia.ipynb
+├── queries.sql
+├── excel.md
+└── README.md
+```
+
+---
+
+## Etapas Realizadas
+
+### Modelagem e ETL (SQL)
+
+- Criação do modelo relacional com 3 tabelas: `clientes`, `contratos`, `pagamentos`
+- View enriquecida `vw_pagamentos_enriquecidos` consolidando dados das 3 tabelas
+- Limpeza de dados: identificação de registros inconsistentes e recálculo de `dias_atraso`
+- Dicionário de dados documentado diretamente no script
+
+### KPIs Analíticos (SQL)
+
+- Taxa de inadimplência por produto
+- Exposição financeira em risco por UF
+- Distribuição de aging em faixas (01-30 / 31-60 / 61-90 / 90+ dias)
+- Ticket médio e volume por segmento (PF vs PJ)
+- Identificação dos clientes de maior risco
+- Tendência mensal de pagamentos (série temporal)
+
+### Análise Exploratória (Python)
+
+- Merge das 3 tabelas e enriquecimento com colunas calculadas
+- Visão geral da carteira com KPIs consolidados
+- Distribuição de status dos contratos
+- Inadimplência por produto
+- Aging — quantidade e valor em aberto por faixa de atraso
+- Comparativo PF vs PJ: volume, ticket médio e score
+- Correlação entre score de crédito e dias de atraso
+- Mapa de correlação entre variáveis numéricas
+
+### Excel
+
+- Importação da view SQL exportada como CSV
+- Coluna auxiliar de `faixa_atraso` com `SE` aninhado
+- Tabela dinâmica de aging por produto
+- Formatação condicional por faixa de atraso
+- Dashboard com 4 gráficos e segmentações interativas (slicers)
+
+---
+
+## Principais Descobertas
+
+### Concentração de Risco em PJ
+
+- Clientes PJ representam **40% da base**, mas concentram **92% do valor inadimplente**
+- Risco assimétrico — o volume financeiro por contrato PJ é muito superior ao PF
+
+### Score de Crédito como Preditor
+
+- **100% das parcelas na faixa crítica (90+ dias)** pertencem a clientes com score abaixo de 500
+- O score se mostrou um preditor confiável de inadimplência dentro da carteira analisada
+
+### Desempenho por Produto
+
+| Produto | Taxa de Inadimplência |
+| --- | --- |
+| Consignado | 0,0% |
+| Crédito Pessoal | 50,0% |
+| Capital de Giro | 100,0% |
+
+- **Consignado** apresenta zero inadimplência — padrão esperado pelo desconto em folha
+- **Capital de Giro** concentra todo o risco da carteira simulada
+
+### Aging da Carteira
+
+| Faixa de Atraso | Parcelas | Valor em Aberto |
+| --- | --- | --- |
+| Sem atraso | 4 | R$ 0 |
+| 01–30 dias | 1 | R$ 1.167 |
+| 31–90 dias | 1 | R$ 708 |
+| 90+ dias | 2 | R$ 20.000 |
+
+---
+
+## Bibliotecas Python
+
+- **Pandas** — manipulação e análise de dados
+- **NumPy** — operações numéricas
+- **Matplotlib** — gráficos e customizações
+- **Seaborn** — visualizações estatísticas
+
+---
 
 ## Autor
 
-**Arthur Villar** — Estudante de Data Science
-
-
+Feito por **Arthur Villar** — estudante de Data Science.
